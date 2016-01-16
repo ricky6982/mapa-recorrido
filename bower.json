@@ -1,0 +1,26 @@
+{
+  "name": "mapa-recorrido",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "RickySSD <ricky6982@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vis": "~4.11.0",
+    "angular": "~1.4.8"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6"
+  }
+}
