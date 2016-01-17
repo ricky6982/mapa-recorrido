@@ -13,6 +13,13 @@
     <div ng-controller="AppCtrl">
         <button ng-click="agregarNodo()">Agregar Nodo</button>
         <button ng-click="toggleAnimacion()">Animación</button>
+        <button ng-click="guardarPosicion()">Guardar posición</button>
+        <button ng-click="restaurarPosiciones()">Restaurar posiciones</button>
+        <button ng-click="addNextAtLast()">Agregar nodo al final</button>
+        <label for="animacion">
+            <input type="checkbox" id="animacion" ng-model="animacion" ng-change="toggleAnimacion()">
+            Animación
+        </label>
         <div id="network_vis" style="border: 1px solid black; height: 400px; margin: 20px;"></div>
     </div>
     <script src="../dist/mapa-recorrido.js"></script>

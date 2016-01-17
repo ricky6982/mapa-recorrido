@@ -11,9 +11,25 @@ app.controller('AppCtrl', [
         console.log(mapa.node.setValor(43));
         console.log(mapa.node.setValor(4356));
         console.log(mapa.node.getValor());
+        mapa.path.add([1, 1, 2, 3, 4 ,1 ]);
+        mapa.setAnimacion(false);
         var n = 1;
+        $scope.toggleAnimacion = function(){
+            mapa.setAnimacion($scope.animacion);
+        };
         $scope.agregarNodo = function(){
             mapa.node.add({id: n, label: n});
+        };
+
+        $scope.guardarPosicion = function(){
+            mapa.savePositions();
+        };
+
+        $scope.restaurarPosiciones = function(){
+            mapa.restorePositions();
+        };
+        $scope.addNextAtLast = function(){
+            mapa.node.addNextAtLast();
         };
         // $scope.red = mapa.network;
 

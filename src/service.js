@@ -9,7 +9,10 @@ angular.module('mapa.recorrido',[])
                 getMapa: getMapa,
                 node: node,
                 edge: edge,
-                path: path
+                path: path,
+                setAnimacion: setAnimacion,
+                savePositions: savePositions,
+                restorePositions: restorePositions
             };
         }
     ])
