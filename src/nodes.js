@@ -26,7 +26,10 @@ node = {
         nodes.remove(ids);
     },
     get: function (id) {
-        return 'nodo: '+id;
+        return nodes.get(id);
+    },
+    getSelected: function(){
+        return network.getSelectedNodes();
     },
     setValor: function(id) {
         valores = id;

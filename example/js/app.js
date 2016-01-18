@@ -3,8 +3,8 @@
 var app = angular.module('app', ['mapa.recorrido']);
 
 app.controller('AppCtrl', [
-    '$scope', 'mapa.service',
-    function($scope, mapa){
+    '$scope', 'mapa.service', '$timeout',
+    function($scope, mapa, $timeout){
         console.log(mapa.getMapa());
         console.log(mapa.edge.get(43));
         console.log(mapa.edge.getByNodes(43, 56));
@@ -31,6 +31,22 @@ app.controller('AppCtrl', [
         $scope.addNextAtLast = function(){
             mapa.node.addNextAtLast();
         };
+
+        mapa.events.nodoSeleccionado.suscribe($scope, function(){
+            $timeout(function(){
+                var nodo = mapa.node.getSelected()[0];
+                $scope.nodoSeleccionado = mapa.node.get(nodo);
+                // console.log(nodo);
+            },0);
+        });
+
+        mapa.events.arcoSeleccionado.suscribe($scope, function(){
+            $timeout(function(){
+                var arco = mapa.edge.getSelected()[0];
+                $scope.arcoSeleccionado = mapa.edge.get(arco);
+            },0);
+        });
+
         // $scope.red = mapa.network;
 
         // $scope.nodo = {

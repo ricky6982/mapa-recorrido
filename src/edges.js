@@ -14,7 +14,10 @@ edge = {
         edges.remove(ids);
     },
     get: function(id) {
-        return 'arco: ' + id;
+        return edges.get(id);
+    },
+    getSelected: function(){
+        return network.getSelectedEdges();
     },
     count: function(){
         return edges.length;

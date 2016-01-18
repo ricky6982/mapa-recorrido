@@ -21,17 +21,6 @@
 
     var network = new vis.Network(container, data, options);
 
-    // 
-    // Definición de Eventos de la Red
-    // 
-    network.on('selectEdge', function(){
-        console.log('arco seleccionado');
-    });
-
-    network.on('selectNode', function(){
-        console.log('nodo seleccionado');
-    });
-
     //
     // Funciones de Animación de la Red
     //

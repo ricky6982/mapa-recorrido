@@ -24,17 +24,6 @@
 
     var network = new vis.Network(container, data, options);
 
-    // 
-    // Definición de Eventos de la Red
-    // 
-    network.on('selectEdge', function(){
-        console.log('arco seleccionado');
-    });
-
-    network.on('selectNode', function(){
-        console.log('nodo seleccionado');
-    });
-
     //
     // Funciones de Animación de la Red
     //
@@ -94,7 +83,10 @@ node = {
         nodes.remove(ids);
     },
     get: function (id) {
-        return 'nodo: '+id;
+        return nodes.get(id);
+    },
+    getSelected: function(){
+        return network.getSelectedNodes();
     },
     setValor: function(id) {
         valores = id;
@@ -123,7 +115,10 @@ edge = {
         edges.remove(ids);
     },
     get: function(id) {
-        return 'arco: ' + id;
+        return edges.get(id);
+    },
+    getSelected: function(){
+        return network.getSelectedEdges();
     },
     count: function(){
         return edges.length;
@@ -183,7 +178,39 @@ path = {
  */
 angular.module('mapa.recorrido',[])
     .factory('mapa.service', [
-        function(){
+        '$rootScope',
+        function($rootScope){
+            /**
+             * Definición de Eventos
+             */
+            events = {
+                nodoSeleccionado:{
+                    suscribe: function(scope, callback){
+                        var handler = $rootScope.$on('selected-nodes', callback);
+                        scope.$on('$destroy', handler);
+                    },
+                    notify: function() {
+                        $rootScope.$emit('selected-nodes');
+                    }
+                },
+                arcoSeleccionado:{
+                    suscribe: function(scope, callback){
+                        var handler = $rootScope.$on('selected-edges', callback);
+                        scope.$on('$destroy', handler);
+                    },
+                    notify: function() {
+                        $rootScope.$emit('selected-edges');
+                    }
+                }
+            };
+
+            network.on('selectNode', function(){
+                $rootScope.$emit('selected-nodes');
+            });
+            network.on('selectEdge', function(){
+                $rootScope.$emit('selected-edges');
+            });
+
             return {
                 getMapa: getMapa,
                 node: node,
@@ -191,7 +218,8 @@ angular.module('mapa.recorrido',[])
                 path: path,
                 setAnimacion: setAnimacion,
                 savePositions: savePositions,
-                restorePositions: restorePositions
+                restorePositions: restorePositions,
+                events: events
             };
         }
     ])
