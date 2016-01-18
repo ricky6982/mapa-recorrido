@@ -4,8 +4,8 @@
  * sobre los Nodos
  */
 node = {
-    add: function(nodes){
-        nodes.add(nodes);
+    add: function(n){
+        nodes.add(n);
     },
     addNext: function(nodo){
 
@@ -19,8 +19,8 @@ node = {
         nodos.push(lastNode + 1);
         path.add(nodos);
     },
-    update: function(ids, changeData){
-        nodes.update(ids, changeData);
+    update: function(ids){
+        nodes.update(ids);
     },
     remove: function(ids){
         nodes.remove(ids);

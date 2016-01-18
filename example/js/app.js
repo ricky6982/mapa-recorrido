@@ -12,13 +12,13 @@ app.controller('AppCtrl', [
         console.log(mapa.node.setValor(4356));
         console.log(mapa.node.getValor());
         mapa.path.add([1, 1, 2, 3, 4 ,1 ]);
-        mapa.setAnimacion(false);
-        var n = 1;
+        mapa.setAnimacion(true);
+        var n = 100;
         $scope.toggleAnimacion = function(){
             mapa.setAnimacion($scope.animacion);
         };
         $scope.agregarNodo = function(){
-            mapa.node.add({id: n, label: n});
+            mapa.node.add({id: n, label: 'N-'+n});
         };
 
         $scope.guardarPosicion = function(){
@@ -36,7 +36,6 @@ app.controller('AppCtrl', [
             $timeout(function(){
                 var nodo = mapa.node.getSelected()[0];
                 $scope.nodoSeleccionado = mapa.node.get(nodo);
-                // console.log(nodo);
             },0);
         });
 
@@ -47,6 +46,9 @@ app.controller('AppCtrl', [
             },0);
         });
 
+        $scope.updateInfRef = function(){
+            mapa.edge.update($scope.arcoSeleccionado);
+        };
         // $scope.red = mapa.network;
 
         // $scope.nodo = {

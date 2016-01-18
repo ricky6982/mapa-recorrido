@@ -61,8 +61,8 @@
  * sobre los Nodos
  */
 node = {
-    add: function(nodes){
-        nodes.add(nodes);
+    add: function(n){
+        nodes.add(n);
     },
     addNext: function(nodo){
 
@@ -76,8 +76,8 @@ node = {
         nodos.push(lastNode + 1);
         path.add(nodos);
     },
-    update: function(ids, changeData){
-        nodes.update(ids, changeData);
+    update: function(ids){
+        nodes.update(ids);
     },
     remove: function(ids){
         nodes.remove(ids);
@@ -105,11 +105,11 @@ node = {
  * sobre los Arcos
  */
 edge = {
-    add: function(edges){
-        edges.add(edges);
+    add: function(e){
+        edges.add(e);
     },
-    update: function(ids, changeData){
-        edges.update(ids, changeData);
+    update: function(ids){
+        edges.update(ids);
     },
     remove: function(ids){
         edges.remove(ids);

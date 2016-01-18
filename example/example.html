@@ -30,6 +30,8 @@
             <dt>Arco Seleccionado: </dt>
             <dd>{{ arcoSeleccionado }}</dd>
         </dl>
+        <input type="text" ng-model="arcoSeleccionado.infRef">
+        <input type="button" ng-click="updateInfRef()" value="actualizar informacion referencial">
     </div>
     <script src="../dist/mapa-recorrido.js"></script>
     <script src="js/app.js"></script>

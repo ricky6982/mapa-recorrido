@@ -4,11 +4,11 @@
  * sobre los Arcos
  */
 edge = {
-    add: function(edges){
-        edges.add(edges);
+    add: function(e){
+        edges.add(e);
     },
-    update: function(ids, changeData){
-        edges.update(ids, changeData);
+    update: function(ids){
+        edges.update(ids);
     },
     remove: function(ids){
         edges.remove(ids);
