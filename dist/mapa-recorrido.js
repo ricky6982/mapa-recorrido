@@ -201,6 +201,16 @@ angular.module('mapa.recorrido',[])
                     notify: function() {
                         $rootScope.$emit('selected-edges');
                     }
+                },
+                clickCanvas: {
+                    suscribe: function(scope, callback){
+                        var handler = $rootScope.$on('click-canvas', callback);
+                        scope.$on('$destroy', handler);
+                    },
+                    notify: function(){
+                        $rootScope.$emit('click-canvas');
+                    }
+
                 }
             };
 
@@ -209,6 +219,9 @@ angular.module('mapa.recorrido',[])
             });
             network.on('selectEdge', function(){
                 $rootScope.$emit('selected-edges');
+            });
+            network.on('click', function(){
+                $rootScope.$emit('click-canvas');
             });
 
             return {

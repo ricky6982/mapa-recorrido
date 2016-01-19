@@ -46,6 +46,19 @@ app.controller('AppCtrl', [
             },0);
         });
 
+        mapa.events.clickCanvas.suscribe($scope, function(){
+            if (mapa.node.getSelected().length === 0) {
+                $timeout(function(){
+                    $scope.nodoSeleccionado = null;
+                },0);
+            }
+            if (mapa.edge.getSelected().length === 0) {
+                $timeout(function(){
+                    $scope.arcoSeleccionado = null;
+                },0);
+            }
+        });
+
         $scope.updateInfRef = function(){
             mapa.edge.update($scope.arcoSeleccionado);
         };
