@@ -22,8 +22,16 @@ node = {
     update: function(ids){
         nodes.update(ids);
     },
-    remove: function(ids){
-        nodes.remove(ids);
+    remove: function(id){
+        var nodoEliminar = nodes.get(id);
+        if (typeof nodoEliminar.conexiones != "undefined") {
+            var conexiones = Object.keys(nodoEliminar.conexiones);
+            angular.forEach(conexiones, function(element){
+                edge.removeByNodes(id, element);
+                actualizarConexionOrientacion(id, element);
+            });
+        }
+        nodes.remove(id);
     },
     get: function (id) {
         return nodes.get(id);

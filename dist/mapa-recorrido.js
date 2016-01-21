@@ -123,8 +123,16 @@ node = {
     update: function(ids){
         nodes.update(ids);
     },
-    remove: function(ids){
-        nodes.remove(ids);
+    remove: function(id){
+        var nodoEliminar = nodes.get(id);
+        if (typeof nodoEliminar.conexiones != "undefined") {
+            var conexiones = Object.keys(nodoEliminar.conexiones);
+            angular.forEach(conexiones, function(element){
+                edge.removeByNodes(id, element);
+                actualizarConexionOrientacion(id, element);
+            });
+        }
+        nodes.remove(id);
     },
     get: function (id) {
         return nodes.get(id);
@@ -170,6 +178,13 @@ edge = {
 
     getByNodes: function (n1, n2) {
         return 'arco de ' + n1 + ' a ' + n2;
+    },
+
+    removeByNodes: function(n1, n2){
+        a = network.nodesHandler.getConnectedEdges(n1);
+        b = network.nodesHandler.getConnectedEdges(n2);
+        interseccion = $(b).not($(b).not(a));
+        edges.remove(interseccion[0]);
     }
 
 };

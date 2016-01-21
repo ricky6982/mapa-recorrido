@@ -25,6 +25,13 @@ edge = {
 
     getByNodes: function (n1, n2) {
         return 'arco de ' + n1 + ' a ' + n2;
+    },
+
+    removeByNodes: function(n1, n2){
+        a = network.nodesHandler.getConnectedEdges(n1);
+        b = network.nodesHandler.getConnectedEdges(n2);
+        interseccion = $(b).not($(b).not(a));
+        edges.remove(interseccion[0]);
     }
 
 };
