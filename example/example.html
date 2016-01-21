@@ -12,9 +12,8 @@
 <body ng-app="app">
     <div ng-controller="AppCtrl">
         <button ng-click="agregarNodo()">Agregar Nodo</button>
-        <button ng-click="toggleAnimacion()">Animación</button>
-        <button ng-click="guardarPosicion()">Guardar posición</button>
-        <button ng-click="restaurarPosiciones()">Restaurar posiciones</button>
+        <button ng-click="guardarPosicion()">Guardar posiciones de nodos</button>
+        <button ng-click="restaurarPosiciones()">Restaurar posiciones de nodos</button>
         <button ng-click="addNextAtLast()">Agregar nodo al final</button>
         <label for="animacion">
             <input type="checkbox" id="animacion" ng-model="animacion" ng-change="toggleAnimacion()">
@@ -22,16 +21,43 @@
         </label>
         <div id="network_vis" style="border: 1px solid black; height: 400px; margin: 20px;"></div>
 
-        <dl>
-            <dt>Nodo Seleccionado: </dt>
-            <dd>{{ nodoSeleccionado }}</dd>
-        </dl>
-        <dl>
-            <dt>Arco Seleccionado: </dt>
-            <dd>{{ arcoSeleccionado }}</dd>
-        </dl>
-        <input type="text" ng-model="arcoSeleccionado.infRef">
-        <input type="button" ng-click="updateInfRef()" value="actualizar informacion referencial">
+        <div class="row">
+            <div class="col-sm-6">
+                <dl>
+                    <dt>Nodo Seleccionado: </dt>
+                    <dd>{{ nodoSeleccionado }}</dd>
+                </dl>
+                <div>
+                    <button ng-click="eliminarNodoSeleccionado()">Eliminar Nodo Seleccionado</button>
+                </div>
+                <dl>
+                    <dt>Arco Seleccionado: </dt>
+                    <dd>{{ arcoSeleccionado }}</dd>
+                </dl>
+                <input type="text" ng-model="arcoSeleccionado.infRef">
+                <input type="button" ng-click="updateInfRef()" value="actualizar informacion referencial">
+            </div>
+            <div class="col-sm-6">
+                <div>
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#nodeModel" role="tab" data-toggle="tab" ng-click="getNodeData()">Modelo Nodo</a></li>
+                    <li role="presentation"><a href="#edgeModel" role="tab" data-toggle="tab" ng-click="getEdgeData()">Modelo Arco</a></li>
+                  </ul>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="nodeModel">
+                        <pre>{{ nodeData | json }}</pre>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="edgeModel">
+                        <pre>{{ edgeData | json }}</pre>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+        </div>
     </div>
     <script src="../dist/mapa-recorrido.js"></script>
     <script src="js/app.js"></script>

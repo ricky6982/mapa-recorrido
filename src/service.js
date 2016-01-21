@@ -52,6 +52,7 @@ angular.module('mapa.recorrido',[])
 
             return {
                 getMapa: getMapa,
+                getData: data,
                 node: node,
                 edge: edge,
                 path: path,

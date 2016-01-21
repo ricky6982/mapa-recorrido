@@ -32,6 +32,13 @@ app.controller('AppCtrl', [
             mapa.node.addNextAtLast();
         };
 
+        $scope.getNodeData = function(){
+            $scope.nodeData = mapa.getData.nodes;
+        };
+        $scope.getEdgeData = function(){
+            $scope.edgeData = mapa.getData.edges;
+        };
+
         mapa.events.nodoSeleccionado.suscribe($scope, function(){
             $timeout(function(){
                 var nodo = mapa.node.getSelected()[0];
@@ -62,6 +69,7 @@ app.controller('AppCtrl', [
         $scope.updateInfRef = function(){
             mapa.edge.update($scope.arcoSeleccionado);
         };
+
         // $scope.red = mapa.network;
 
         // $scope.nodo = {
