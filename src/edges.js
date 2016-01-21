@@ -10,8 +10,12 @@ edge = {
     update: function(ids){
         edges.update(ids);
     },
-    remove: function(ids){
-        edges.remove(ids);
+    remove: function(id){
+        arcoEliminar = edges.get(id);
+        n1 = arcoEliminar.from;
+        n2 = arcoEliminar.to;
+        edges.remove(id);
+        actualizarConexionOrientacion(arcoEliminar.from, arcoEliminar.to);
     },
     get: function(id) {
         return edges.get(id);

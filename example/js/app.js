@@ -73,6 +73,10 @@ app.controller('AppCtrl', [
         $scope.eliminarNodoSeleccionado = function(){
             mapa.node.remove($scope.nodoSeleccionado.id);
         };
+
+        $scope.eliminarArcoSeleccionado = function(){
+            mapa.edge.remove($scope.arcoSeleccionado.id);
+        };
         // $scope.red = mapa.network;
 
         // $scope.nodo = {

@@ -34,6 +34,9 @@
                     <dt>Arco Seleccionado: </dt>
                     <dd>{{ arcoSeleccionado }}</dd>
                 </dl>
+                <div>
+                    <button ng-click="eliminarArcoSeleccionado()">Eliminar Nodo Seleccionado</button>
+                </div>
                 <input type="text" ng-model="arcoSeleccionado.infRef">
                 <input type="button" ng-click="updateInfRef()" value="actualizar informacion referencial">
             </div>
