@@ -70,6 +70,14 @@ app.controller('AppCtrl', [
             mapa.edge.update($scope.arcoSeleccionado);
         };
 
+        $scope.updateOrientacion = function(){
+            mapa.node.updateOrientacion($scope.nodoSeleccionado);
+        };
+
+        $scope.validarOrientacion = function(){
+            mapa.node.validarOrientacion();
+        };
+
         $scope.eliminarNodoSeleccionado = function(){
             mapa.node.remove($scope.nodoSeleccionado.id);
         };

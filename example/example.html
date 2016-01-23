@@ -23,22 +23,86 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <dl>
-                    <dt>Nodo Seleccionado: </dt>
-                    <dd>{{ nodoSeleccionado }}</dd>
-                </dl>
-                <div>
-                    <button ng-click="eliminarNodoSeleccionado()">Eliminar Nodo Seleccionado</button>
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Selección de Nodos y Arcos
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                        <dl>
+                            <dt>Nodo Seleccionado: </dt>
+                            <dd>{{ nodoSeleccionado }}</dd>
+                        </dl>
+                        <div>
+                            <button ng-click="eliminarNodoSeleccionado()" class="btn btn-danger">Eliminar Nodo Seleccionado</button>
+                        </div>
+                        <dl>
+                            <dt>Arco Seleccionado: </dt>
+                            <dd>{{ arcoSeleccionado }}</dd>
+                        </dl>
+                        <div>
+                            <button ng-click="eliminarArcoSeleccionado()" class="btn btn-danger">Eliminar Nodo Seleccionado</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                      <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Información Referencial
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                      <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="">Información Referencial</label>
+                                <input type="text" ng-model="arcoSeleccionado.infRef" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Distancia entre nodos</label>
+                                <input type="text" ng-model="arcoSeleccionado.distancia" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="button" ng-click="updateInfRef()" value="Actualizar Informacion Referencial" class="btn btn-primary">
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                      <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Orientación
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                      <div class="panel-body">
+                        <div ng-repeat="(key, value) in nodoSeleccionado.conexiones" class="form-group">Nodo <strong>" {{ key }} " </strong>por 
+                          <select ng-model="nodoSeleccionado.conexiones[key]" class="form-control">
+                            <option value="izq">Izquierda</option>
+                            <option value="der">Derecha</option>
+                            <option value="arr">Arriba</option>
+                            <option value="abj">Abajo</option>
+                          </select>
+                        </div>
+                        <button class="btn btn-primary" ng-click="updateOrientacion()">Aplicar</button>
+                        <button class="btn btn-primary" ng-click="validarOrientacion()">Validar Orientación entre Nodos</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <dl>
-                    <dt>Arco Seleccionado: </dt>
-                    <dd>{{ arcoSeleccionado }}</dd>
-                </dl>
-                <div>
-                    <button ng-click="eliminarArcoSeleccionado()">Eliminar Nodo Seleccionado</button>
-                </div>
-                <input type="text" ng-model="arcoSeleccionado.infRef">
-                <input type="button" ng-click="updateInfRef()" value="actualizar informacion referencial">
+                
+                
             </div>
             <div class="col-sm-6">
                 <div>

@@ -2,9 +2,9 @@
  * Funciónes Comunes
  */
 
-    //
-    // Definición de Variables de la Red
-    //
+//
+// Definición de Variables de la Red
+//
     var container = document.getElementById('network_vis'),
         nodes = new vis.DataSet([]),
         edges = new vis.DataSet([]),
@@ -21,9 +21,23 @@
 
     var network = new vis.Network(container, data, options);
 
-    //
-    // Funciones de Animación de la Red
-    //
+    var nodoSuccess = {
+        background: "#10E256",
+        highlight: {
+            background: "#10E256"
+        }
+    };
+
+    var nodoWarning = {
+        background: "#FFBD66",
+        highlight: {
+            background: "#FFBD66"
+        }
+    };
+
+//
+// Funciones de Animación de la Red
+//
     function setAnimacion(flag){
         if (flag) {
             network.setOptions({nodes: { physics: true }});
@@ -90,6 +104,20 @@
             }
         }
         
+    }
+
+    // Función para obtener la inversa de una dirección.
+    function direccionInversa(direccion){
+        switch(direccion){
+            case 'izq':
+                return 'der';
+            case 'der':
+                return 'izq';
+            case 'arr':
+                return 'abj';
+            case 'abj':
+                return 'arr';
+        }
     }
 
 
