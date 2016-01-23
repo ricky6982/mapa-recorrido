@@ -35,6 +35,8 @@
         }
     };
 
+    var dijkstras;
+
 //
 // Funciones de Animación de la Red
 //

@@ -37,10 +37,25 @@ path = {
         }
         return true;
     },
-    shortest: function(n1, n2){
-        if (n1 == n2) {
+    shortest: function(i, f){
+        dijkstras.makeGraph(edges._data);
+        return dijkstras.shortestPath(1,3);
+    },
+    distancia: function(arrayNodos){
+        if (arrayNodos.length > 1) {
+            var d = 0;
+            for (var i = 0; i < arrayNodos.length - 1; i++) {
+                arco = edge.getByNodes(arrayNodos[i], arrayNodos[i+1]);
+                if (arco) {
+                    d += parseFloat(arco.label);
+                }else{
+                    return Infinity;
+                }
+            }
+            return d;
+        }else{
             return 0;
         }
-        console.log('calcular el camino mas corto');
     }
+
 };

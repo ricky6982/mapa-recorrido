@@ -97,6 +97,8 @@
         }
     };
 
+    var dijkstras;
+
 //
 // Funciones de Animación de la Red
 //
@@ -313,7 +315,14 @@ edge = {
     },
 
     getByNodes: function (n1, n2) {
-        return 'arco de ' + n1 + ' a ' + n2;
+        var flag = true;
+        var arcoId = null;
+        angular.forEach(edges._data, function(arco){
+            if ((arco.from == n1 && arco.to == n2) || (arco.from == n2 && arco.to == n1)) {
+                arcoId = arco.id;
+            }
+        });
+        return edges.get(arcoId);
     },
 
     removeByNodes: function(n1, n2){
@@ -363,12 +372,27 @@ path = {
         }
         return true;
     },
-    shortest: function(n1, n2){
-        if (n1 == n2) {
+    shortest: function(i, f){
+        dijkstras.makeGraph(edges._data);
+        return dijkstras.shortestPath(1,3);
+    },
+    distancia: function(arrayNodos){
+        if (arrayNodos.length > 1) {
+            var d = 0;
+            for (var i = 0; i < arrayNodos.length - 1; i++) {
+                arco = edge.getByNodes(arrayNodos[i], arrayNodos[i+1]);
+                if (arco) {
+                    d += parseFloat(arco.label);
+                }else{
+                    return Infinity;
+                }
+            }
+            return d;
+        }else{
             return 0;
         }
-        console.log('calcular el camino mas corto');
     }
+
 };
 
 /**
@@ -377,7 +401,9 @@ path = {
 angular.module('mapa.recorrido',['dijkstras-service'])
     .factory('mapa.service', [
         '$rootScope', 'dijkstras',
-        function($rootScope, dijkstras){
+        function($rootScope, dijkstrasService){
+            dijkstras = dijkstrasService; // Asignando el servicio a una variable global
+
             /**
              * Definición de Eventos
              */
@@ -432,10 +458,6 @@ angular.module('mapa.recorrido',['dijkstras-service'])
                 savePositions: savePositions,
                 restorePositions: restorePositions,
                 events: events,
-                shortestPath: function(i, f){
-                    dijkstras.makeGraph(edges._data);
-                    return dijkstras.shortestPath(1,3);
-                }
             };
         }
     ])

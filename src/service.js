@@ -5,7 +5,9 @@
 angular.module('mapa.recorrido',['dijkstras-service'])
     .factory('mapa.service', [
         '$rootScope', 'dijkstras',
-        function($rootScope, dijkstras){
+        function($rootScope, dijkstrasService){
+            dijkstras = dijkstrasService; // Asignando el servicio a una variable global
+
             /**
              * Definición de Eventos
              */
@@ -60,10 +62,6 @@ angular.module('mapa.recorrido',['dijkstras-service'])
                 savePositions: savePositions,
                 restorePositions: restorePositions,
                 events: events,
-                shortestPath: function(i, f){
-                    dijkstras.makeGraph(edges._data);
-                    return dijkstras.shortestPath(1,3);
-                }
             };
         }
     ])

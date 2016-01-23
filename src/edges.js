@@ -28,7 +28,14 @@ edge = {
     },
 
     getByNodes: function (n1, n2) {
-        return 'arco de ' + n1 + ' a ' + n2;
+        var flag = true;
+        var arcoId = null;
+        angular.forEach(edges._data, function(arco){
+            if ((arco.from == n1 && arco.to == n2) || (arco.from == n2 && arco.to == n1)) {
+                arcoId = arco.id;
+            }
+        });
+        return edges.get(arcoId);
     },
 
     removeByNodes: function(n1, n2){

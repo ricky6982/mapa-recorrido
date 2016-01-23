@@ -87,7 +87,8 @@ app.controller('AppCtrl', [
         };
 
         $scope.calcularDistancia = function(){
-            console.log(mapa.shortestPath(1,3));
+            console.log(mapa.path.shortest(1,3));
+            console.log(mapa.path.distancia(mapa.path.shortest(1,3)));
         };
         // $scope.red = mapa.network;
 
