@@ -12,7 +12,7 @@
     var filter;
 
     function addConexion(nodoInicial, nodoFinal, valorDistancia){
-        valorDistancia = parseInt(valorDistancia,10);
+        valorDistancia = parseFloat(valorDistancia);
         buscarNodo = filter('filter')(grafoDijkstra, {origen: nodoInicial });
         if (buscarNodo.length === 0) {
             conexion = [];
