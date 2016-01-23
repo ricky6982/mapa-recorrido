@@ -35,6 +35,20 @@
         }
     };
 
+    var arcoSuccess = {
+        color:'#33B907',
+        highlight:'#33B907',
+        hover: '#33B907',
+        opacity:1.0
+    };
+
+    var arcoWarning = {
+        color:'#F1A417',
+        highlight:'#F1A417',
+        hover: '#F1A417',
+        opacity:1.0
+    };
+
     var dijkstras;
 
 //

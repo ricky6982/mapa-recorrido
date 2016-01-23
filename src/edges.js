@@ -7,8 +7,9 @@ edge = {
     add: function(e){
         edges.add(e);
     },
-    update: function(ids){
-        edges.update(ids);
+    update: function(e){
+        edge.verificarEstado(e);
+        edges.update(e);
     },
     remove: function(id){
         arcoEliminar = edges.get(id);
@@ -25,6 +26,17 @@ edge = {
     },
     count: function(){
         return edges.length;
+    },
+    verificarEstado: function(e){
+        if (typeof e.infRef != "undefined" && typeof e.label != "undefined") {
+            if (e.infRef.length > 0 && !isNaN(parseFloat(e.label))) {
+                e.color = arcoSuccess;
+            }else{
+                e.color = arcoWarning;
+            }
+        }else{
+            e.color = arcoWarning;
+        }
     },
 
     getByNodes: function (n1, n2) {

@@ -90,6 +90,18 @@ app.controller('AppCtrl', [
             console.log(mapa.path.shortest(1,3));
             console.log(mapa.path.distancia(mapa.path.shortest(1,3)));
         };
+
+        $scope.cambiarColorArco = function(){
+            arco = mapa.edge.getByNodes(1,2);
+            arco.color = {
+                color:'#F1A417',
+                highlight:'#F1A417',
+                hover: '#F1A417',
+                opacity:1.0
+            };
+            mapa.edge.update(arco);
+            console.log(arco);
+        };
         // $scope.red = mapa.network;
 
         // $scope.nodo = {

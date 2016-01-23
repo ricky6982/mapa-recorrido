@@ -97,6 +97,20 @@
         }
     };
 
+    var arcoSuccess = {
+        color:'#33B907',
+        highlight:'#33B907',
+        hover: '#33B907',
+        opacity:1.0
+    };
+
+    var arcoWarning = {
+        color:'#F1A417',
+        highlight:'#F1A417',
+        hover: '#F1A417',
+        opacity:1.0
+    };
+
     var dijkstras;
 
 //
@@ -294,8 +308,9 @@ edge = {
     add: function(e){
         edges.add(e);
     },
-    update: function(ids){
-        edges.update(ids);
+    update: function(e){
+        edge.verificarEstado(e);
+        edges.update(e);
     },
     remove: function(id){
         arcoEliminar = edges.get(id);
@@ -312,6 +327,17 @@ edge = {
     },
     count: function(){
         return edges.length;
+    },
+    verificarEstado: function(e){
+        if (typeof e.infRef != "undefined" && typeof e.label != "undefined") {
+            if (e.infRef.length > 0 && !isNaN(parseFloat(e.label))) {
+                e.color = arcoSuccess;
+            }else{
+                e.color = arcoWarning;
+            }
+        }else{
+            e.color = arcoWarning;
+        }
     },
 
     getByNodes: function (n1, n2) {
