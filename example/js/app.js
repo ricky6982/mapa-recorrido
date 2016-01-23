@@ -85,6 +85,10 @@ app.controller('AppCtrl', [
         $scope.eliminarArcoSeleccionado = function(){
             mapa.edge.remove($scope.arcoSeleccionado.id);
         };
+
+        $scope.calcularDistancia = function(){
+            console.log(mapa.shortestPath(1,3));
+        };
         // $scope.red = mapa.network;
 
         // $scope.nodo = {

@@ -1,6 +1,65 @@
 (function(window, angular, vis, undefined){
 
 
+/**
+ * Servicio que encapsula la libreria de dijkstras
+ * para la utilización en el servicio de mapa de recorridos.
+ */
+(function(angular){
+
+    var g = new Graph();
+    var grafoDijkstra = [];
+    var filter;
+
+    function addConexion(nodoInicial, nodoFinal, valorDistancia){
+        valorDistancia = parseInt(valorDistancia,10);
+        buscarNodo = filter('filter')(grafoDijkstra, {origen: nodoInicial });
+        if (buscarNodo.length === 0) {
+            conexion = [];
+            conexion.push({
+                destino: nodoFinal,
+                distancia: valorDistancia
+            });
+            grafoDijkstra.push({origen: nodoInicial, conexiones: conexion });
+        }else{
+            buscarNodo[0].conexiones.push({destino: nodoFinal, distancia: valorDistancia});
+        }
+    }
+
+    function makeGraph(arcos){
+        angular.forEach(arcos, function(value, key){
+            addConexion(value.from, value.to, value.label);
+            addConexion(value.to, value.from, value.label);
+        });
+
+        angular.forEach(grafoDijkstra, function(value, key){
+            enlaces = {};
+            angular.forEach(value.conexiones, function(conexion, i){
+                enlaces[conexion.destino] = conexion.distancia;
+            });
+            g.addVertex(value.origen, enlaces);
+        });
+    }
+
+    angular.module('dijkstras-service', [])
+        .factory('dijkstras', [
+            '$filter',
+            function($filter){
+                filter = $filter;
+                return {
+                    makeGraph: makeGraph,
+                    shortestPath: function(i, f){
+                        i = i.toString();
+                        f = f.toString();
+                        return g.shortestPath(i, f).concat([i]).reverse();
+                    },
+                };
+            }
+        ])
+    ;
+
+}(angular));
+
 /** 
  * Funciónes Comunes
  */
@@ -315,10 +374,10 @@ path = {
 /**
  * Definición del Servicio Angular
  */
-angular.module('mapa.recorrido',[])
+angular.module('mapa.recorrido',['dijkstras-service'])
     .factory('mapa.service', [
-        '$rootScope',
-        function($rootScope){
+        '$rootScope', 'dijkstras',
+        function($rootScope, dijkstras){
             /**
              * Definición de Eventos
              */
@@ -372,7 +431,11 @@ angular.module('mapa.recorrido',[])
                 setAnimacion: setAnimacion,
                 savePositions: savePositions,
                 restorePositions: restorePositions,
-                events: events
+                events: events,
+                shortestPath: function(i, f){
+                    dijkstras.makeGraph(edges._data);
+                    return dijkstras.shortestPath(1,3);
+                }
             };
         }
     ])

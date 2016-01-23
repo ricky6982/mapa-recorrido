@@ -2,10 +2,10 @@
 /**
  * Definición del Servicio Angular
  */
-angular.module('mapa.recorrido',[])
+angular.module('mapa.recorrido',['dijkstras-service'])
     .factory('mapa.service', [
-        '$rootScope',
-        function($rootScope){
+        '$rootScope', 'dijkstras',
+        function($rootScope, dijkstras){
             /**
              * Definición de Eventos
              */
@@ -59,7 +59,11 @@ angular.module('mapa.recorrido',[])
                 setAnimacion: setAnimacion,
                 savePositions: savePositions,
                 restorePositions: restorePositions,
-                events: events
+                events: events,
+                shortestPath: function(i, f){
+                    dijkstras.makeGraph(edges._data);
+                    return dijkstras.shortestPath(1,3);
+                }
             };
         }
     ])
