@@ -8,6 +8,7 @@ angular.module('mapa.recorrido',['dijkstras-service'])
         function($rootScope, dijkstrasService, $http){
             dijkstras = dijkstrasService; // Asignando el servicio a una variable global
             var urlRemoteMap = "";
+            var urlSaveRemoteMap = "";
 
             /**
              * Definición de Eventos
@@ -57,6 +58,10 @@ angular.module('mapa.recorrido',['dijkstras-service'])
                 urlRemoteMap = url;
             }
 
+            function setUrlSaveRemoteMap(url){
+                urlSaveRemoteMap = url;
+            }
+
             function getRemoteMap(){
                 if (urlRemoteMap !== "") {
                     $http({
@@ -80,6 +85,25 @@ angular.module('mapa.recorrido',['dijkstras-service'])
                     ;
                 }
             }
+            function sendMap(){
+                console.log(data);
+                if (urlSaveRemoteMap !== "") {
+                    $http({
+                        url: urlSaveRemoteMap,
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: data
+                    })
+                    .success(function(data, status){
+                        console.log('Se guardo el mapa correctamente.');
+                    })
+                    .error(function(err){
+                        console.log('No se pudo guardar el mapa.');
+                    });
+                }
+            }
 
             return {
                 getMapa: getMapa,
@@ -92,7 +116,9 @@ angular.module('mapa.recorrido',['dijkstras-service'])
                 restorePositions: restorePositions,
                 events: events,
                 setUrlRemoteMap: setUrlRemoteMap,
-                getRemoteMap: getRemoteMap
+                getRemoteMap: getRemoteMap,
+                setUrlSaveRemoteMap: setUrlSaveRemoteMap,
+                sendMap: sendMap
             };
         }
     ])

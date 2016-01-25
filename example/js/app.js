@@ -105,6 +105,11 @@ app.controller('AppCtrl', [
 
         mapa.setUrlRemoteMap("http://localhost/mapa-recorrido/example/mapa.json");
         mapa.getRemoteMap();
+
+        $scope.saveMapa = function(){
+            mapa.setUrlSaveRemoteMap('http://localhost/tesisApp/web/app_dev.php/Admin/MapaDeRecorridos/save');
+            mapa.sendMap();
+        };
         // $scope.red = mapa.network;
 
         // $scope.nodo = {
