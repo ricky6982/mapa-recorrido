@@ -11,7 +11,7 @@ app.controller('AppCtrl', [
         console.log(mapa.node.setValor(43));
         console.log(mapa.node.setValor(4356));
         console.log(mapa.node.getValor());
-        mapa.path.add([1, 1, 2, 3, 4 ,1 ]);
+        // mapa.path.add([1, 1, 2, 3, 4 ,1 ]);
         mapa.setAnimacion(true);
         var n = 100;
         $scope.toggleAnimacion = function(){
@@ -102,6 +102,9 @@ app.controller('AppCtrl', [
             mapa.edge.update(arco);
             console.log(arco);
         };
+
+        mapa.setUrlRemoteMap("http://localhost/mapa-recorrido/example/mapa.json");
+        mapa.getRemoteMap();
         // $scope.red = mapa.network;
 
         // $scope.nodo = {

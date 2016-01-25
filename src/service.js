@@ -4,9 +4,10 @@
  */
 angular.module('mapa.recorrido',['dijkstras-service'])
     .factory('mapa.service', [
-        '$rootScope', 'dijkstras',
-        function($rootScope, dijkstrasService){
+        '$rootScope', 'dijkstras', '$http',
+        function($rootScope, dijkstrasService, $http){
             dijkstras = dijkstrasService; // Asignando el servicio a una variable global
+            var urlRemoteMap = "";
 
             /**
              * Definición de Eventos
@@ -52,6 +53,34 @@ angular.module('mapa.recorrido',['dijkstras-service'])
                 $rootScope.$emit('click-canvas');
             });
 
+            function setUrlRemoteMap(url){
+                urlRemoteMap = url;
+            }
+
+            function getRemoteMap(){
+                if (urlRemoteMap !== "") {
+                    $http({
+                        url: urlRemoteMap,
+                        method: 'GET',
+                    })
+                    .success(function(data, status){
+                        angular.forEach(data[0].mapaJson.nodes._data, function(n){
+                            node.add(n);
+                        });
+                        angular.forEach(data[0].mapaJson.edges._data, function(e){
+                            edge.add(e);
+                        });
+                        setAnimacion(false);
+                        restorePositions();
+                        network.fit();
+                    })
+                    .error(function(data){
+                        console.log('No se encontro un mapa');
+                    })
+                    ;
+                }
+            }
+
             return {
                 getMapa: getMapa,
                 getData: data,
@@ -62,6 +91,8 @@ angular.module('mapa.recorrido',['dijkstras-service'])
                 savePositions: savePositions,
                 restorePositions: restorePositions,
                 events: events,
+                setUrlRemoteMap: setUrlRemoteMap,
+                getRemoteMap: getRemoteMap
             };
         }
     ])
