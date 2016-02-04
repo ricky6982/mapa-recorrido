@@ -117,6 +117,46 @@
                       </div>
                     </div>
                   </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                      <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#localizacionServicio" aria-expanded="false" aria-controls="localizacionServicio">
+                          Asignando servicios a un arco seleccionado
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="localizacionServicio" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                      <div class="panel-body">
+                        <div ng-show="arcoSeleccionado">
+                          <h3>Arco seleccionado: {{ arcoSeleccionado.from }} a {{ arcoSeleccionado.to }}</h3>
+                          <label for="direccion">Dirección</label>
+                          <select name="direccion" ng-model="lugar_direccion" class="form-control">
+                             <option value="der">Derecha</option>
+                             <option value="izq">Izquierda</option>
+                          </select>
+                          <label for="idCategoria">Id Categoria
+                              <input type="text" ng-model="lugar.idCategoria" class="form-control">
+                          </label>
+                          <label for="idCategoria">Categoria
+                              <input type="text" ng-model="lugar.categoria" class="form-control">
+                          </label>
+                          <label for="idCategoria">Id Servicio
+                              <input type="text" ng-model="lugar.idServicio" class="form-control">
+                          </label>
+                          <label for="idCategoria">Servicio
+                              <input type="text" ng-model="lugar.servicio" class="form-control">
+                          </label>
+                          <div class="form-group">
+                            <button class="btn btn-primary" ng-click="guardarLugar()">Guardar Servicio</button>
+                          </div>
+                          <pre>{{ arcoSeleccionado.lugares | json }}</pre>
+                        </div>
+                        <div ng-hide="arcoSeleccionado">
+                          <h1 class="text-muted"> Seleccione un arco</h1>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 
                 

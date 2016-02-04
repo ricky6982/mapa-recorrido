@@ -111,6 +111,7 @@ angular.module('mapa.recorrido',['dijkstras-service'])
                 node: node,
                 edge: edge,
                 path: path,
+                lugar: lugar,
                 setAnimacion: setAnimacion,
                 savePositions: savePositions,
                 restorePositions: restorePositions,

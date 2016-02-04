@@ -5,6 +5,7 @@ routerFiles = {
     'src/nodes.js',
     'src/edges.js',
     'src/path.js',
+    'src/service-location.js',
     'src/service.js'
   ]
 };

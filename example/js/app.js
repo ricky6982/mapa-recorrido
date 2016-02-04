@@ -110,6 +110,10 @@ app.controller('AppCtrl', [
             mapa.setUrlSaveRemoteMap('http://localhost/tesisApp/web/app_dev.php/Admin/MapaDeRecorridos/save');
             mapa.sendMap();
         };
+
+        $scope.guardarLugar = function(){
+            mapa.lugar.add($scope.arcoSeleccionado, $scope.lugar, $scope.lugar_direccion);
+        };
         // $scope.red = mapa.network;
 
         // $scope.nodo = {
